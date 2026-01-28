@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>top.fblue</groupId>
-    <artifactId>water-mybatis</artifactId>
+    <artifactId>water-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>water-mybatis</name>
-    <description>water-mybatis</description>
+    <name>water-web</name>
+    <description>water-web</description>
     <url/>
     <licenses>
         <license/>
