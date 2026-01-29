@@ -41,8 +41,24 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
                     <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
+            </plugin>
+
+            <!--在 package 阶段自动执行 mvn source:jar 生成源码 jar-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!--
               关键：发布/安装时把 CI-friendly 版本占位符（${revision} 等）解析成真实版本。
