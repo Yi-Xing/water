@@ -1,4 +1,4 @@
-package top.fblue.web;
+package top.fblue.framework.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

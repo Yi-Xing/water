@@ -1,7 +1,7 @@
 package top.fblue.common.enums;
 
 import lombok.Getter;
-import top.fblue.watermelon.common.exception.BusinessException;
+import top.fblue.common.exception.BusinessException;
 
 /**
  * 状态枚举

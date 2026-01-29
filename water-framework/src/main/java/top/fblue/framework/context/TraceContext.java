@@ -1,10 +1,10 @@
-package top.fblue.web;
+package top.fblue.framework.context;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
-import top.fblue.watermelon.common.constant.TraceConst;
-import top.fblue.watermelon.common.utils.StringUtil;
+import top.fblue.framework.constant.TraceConst;
+import top.fblue.common.utils.StringUtil;
 
 import java.util.UUID;
 

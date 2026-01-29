@@ -1,12 +1,12 @@
-package top.fblue.web.interceptor;
+package top.fblue.framework.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import top.fblue.watermelon.common.utils.StringUtil;
-import top.fblue.watermelon.common.utils.TracingUtils;
+import top.fblue.common.utils.StringUtil;
+import top.fblue.framework.utils.TracingUtils;
 
 
 /**

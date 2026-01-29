@@ -1,4 +1,4 @@
-package top.fblue.web.config;
+package top.fblue.framework.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerIntercept
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import top.fblue.watermelon.infrastructure.interceptor.SqlLogInterceptor;
+import top.fblue.framework.interceptor.SqlLogInterceptor;
 
 /**
  * MyBatis Plus 配置类
