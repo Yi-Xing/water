@@ -2,6 +2,7 @@ package top.fblue.framework.po;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
  * 继承该类的子类，需要额外添加 @EqualsAndHashCode(callSuper = true)
  */
 @Data
+@SuperBuilder(toBuilder = true)
 public class BaseAuditPo implements Serializable {
 
     @Serial
