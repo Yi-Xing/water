@@ -1,7 +1,7 @@
 package top.fblue.framework.po;
 
 import com.baomidou.mybatisplus.annotation.*;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serial;
@@ -13,8 +13,12 @@ import java.time.LocalDateTime;
  * 注意：@Data 的 @EqualsAndHashCode 默认 不包含父类字段。
  * 继承该类的子类，需要额外添加 @EqualsAndHashCode(callSuper = true)
  */
-@Data
+@Getter
+@Setter
 @SuperBuilder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class BaseAuditPo implements Serializable {
 
     @Serial
@@ -23,6 +27,7 @@ public class BaseAuditPo implements Serializable {
     /**
      * ID
      */
+    @EqualsAndHashCode.Include
     @TableId(type = IdType.AUTO)
     private Long id;
 
@@ -54,5 +59,6 @@ public class BaseAuditPo implements Serializable {
      * 是否删除：0 未删除 1 已删除
      */
     @TableLogic
+    @EqualsAndHashCode.Include
     private Integer isDeleted;
 }
