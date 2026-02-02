@@ -1,5 +1,6 @@
-package top.fblue.common.enums;
+package top.fblue.framework.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
 import top.fblue.common.exception.BusinessException;
 
@@ -11,6 +12,7 @@ public enum StateEnum {
     ENABLE(1, "启用"),
     DISABLE(2, "禁用");
 
+    @EnumValue
     private final Integer code;
     private final String desc;
 
@@ -35,21 +37,6 @@ public enum StateEnum {
     }
 
     /**
-     * 根据描述获取枚举
-     */
-    public static StateEnum fromDesc(String desc) {
-        if (desc == null) {
-            throw new BusinessException("Invalid state type desc is null ");
-        }
-        for (StateEnum type : values()) {
-            if (type.getDesc().equals(desc)) {
-                return type;
-            }
-        }
-        throw new BusinessException("Invalid state type desc: " + desc);
-    }
-
-    /**
      * 根据code获取描述
      */
     public static String getDescByCode(Integer code) {
@@ -66,18 +53,6 @@ public enum StateEnum {
         }
         for (StateEnum state : values()) {
             if (state.getCode().equals(code)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 检查 desc 是否有效
-     */
-    public static boolean isValidDesc(String desc) {
-        for (StateEnum type : values()) {
-            if (type.getDesc().equals(desc)) {
                 return true;
             }
         }

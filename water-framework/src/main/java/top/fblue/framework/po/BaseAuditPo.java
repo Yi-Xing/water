@@ -3,6 +3,7 @@ package top.fblue.framework.po;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import top.fblue.framework.enums.DeletedEnum;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -60,5 +61,5 @@ public class BaseAuditPo implements Serializable {
      */
     @TableLogic
     @EqualsAndHashCode.Include
-    private Integer isDeleted;
+    private DeletedEnum isDeleted;
 }
