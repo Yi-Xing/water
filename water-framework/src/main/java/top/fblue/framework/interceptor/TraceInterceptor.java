@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import top.fblue.common.utils.StringUtil;
-import top.fblue.framework.utils.TracingUtils;
+import top.fblue.framework.common.utils.TracingUtils;
 
 
 /**

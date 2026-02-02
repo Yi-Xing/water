@@ -1,4 +1,4 @@
-package top.fblue.framework.constant;
+package top.fblue.framework.common.constant;
 
 /**
  * 全链路追踪相关常量

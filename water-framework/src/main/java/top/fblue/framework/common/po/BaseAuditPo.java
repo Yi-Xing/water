@@ -1,9 +1,9 @@
-package top.fblue.framework.po;
+package top.fblue.framework.common.po;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import top.fblue.framework.enums.DeletedEnum;
+import top.fblue.framework.common.enums.DeletedEnum;
 
 import java.io.Serial;
 import java.io.Serializable;

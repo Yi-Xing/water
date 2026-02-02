@@ -1,4 +1,4 @@
-package top.fblue.framework.constant;
+package top.fblue.framework.common.constant;
 
 public class UserConst {
 

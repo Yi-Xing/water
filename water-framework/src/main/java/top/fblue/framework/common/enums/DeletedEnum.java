@@ -1,4 +1,4 @@
-package top.fblue.framework.enums;
+package top.fblue.framework.common.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;

@@ -3,7 +3,7 @@ package top.fblue.framework.handler;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
-import top.fblue.framework.context.UserContext;
+import top.fblue.framework.common.context.UserContext;
 
 import java.time.LocalDateTime;
 

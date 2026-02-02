@@ -1,12 +1,12 @@
-package top.fblue.framework.context;
+package top.fblue.framework.common.context;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import top.fblue.common.exception.BusinessException;
-import top.fblue.framework.dto.UserTokenDTO;
+import top.fblue.framework.common.dto.UserTokenDTO;
 
-import static top.fblue.framework.constant.UserConst.CURRENT_USER_KEY;
+import static top.fblue.framework.common.constant.UserConst.CURRENT_USER_KEY;
 
 
 /**

@@ -1,9 +1,9 @@
-package top.fblue.framework.utils;
+package top.fblue.framework.common.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import top.fblue.framework.constant.TraceConst;
-import top.fblue.framework.context.TraceContext;
+import top.fblue.framework.common.constant.TraceConst;
+import top.fblue.framework.common.context.TraceContext;
 
 /**
  * 全链路追踪工具类
