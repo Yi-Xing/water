@@ -1,6 +1,7 @@
 package top.fblue.common.response;
 
 import lombok.Data;
+import top.fblue.common.enums.ApiCodeEnum;
 
 /**
  * 统一API响应格式
@@ -11,7 +12,7 @@ public class ApiResponse<T> {
     /**
      * 响应状态码
      */
-    private Integer code;
+    private ApiCodeEnum code;
     
     /**
      * 是否成功
@@ -38,7 +39,7 @@ public class ApiResponse<T> {
      */
     public static <T> ApiResponse<T> success(T data) {
         ApiResponse<T> response = new ApiResponse<>();
-        response.setCode(200);
+        response.setCode(ApiCodeEnum.SUCCESS);
         response.setSuccess(true);
         response.setMessage("操作成功");
         response.setData(data);
@@ -50,7 +51,7 @@ public class ApiResponse<T> {
      */
     public static <T> ApiResponse<T> success(T data, String message) {
         ApiResponse<T> response = new ApiResponse<>();
-        response.setCode(200);
+        response.setCode(ApiCodeEnum.SUCCESS);
         response.setSuccess(true);
         response.setMessage(message);
         response.setData(data);
@@ -60,7 +61,7 @@ public class ApiResponse<T> {
     /**
      * 失败响应
      */
-    public static <T> ApiResponse<T> error(Integer code, String message) {
+    public static <T> ApiResponse<T> error(ApiCodeEnum code, String message) {
         ApiResponse<T> response = new ApiResponse<>();
         response.setCode(code);
         response.setSuccess(false);
@@ -71,7 +72,7 @@ public class ApiResponse<T> {
     /**
      * 失败响应（带数据）
      */
-    public static <T> ApiResponse<T> error(Integer code, String message, T data) {
+    public static <T> ApiResponse<T> error(ApiCodeEnum code, String message, T data) {
         ApiResponse<T> response = new ApiResponse<>();
         response.setCode(code);
         response.setSuccess(false);
@@ -85,7 +86,7 @@ public class ApiResponse<T> {
      */
     public static <T> ApiResponse<T> error(String message, T data) {
         ApiResponse<T> response = new ApiResponse<>();
-        response.setCode(400);
+        response.setCode(ApiCodeEnum.BAD_REQUEST);
         response.setSuccess(false);
         response.setMessage(message);
         response.setData(data);

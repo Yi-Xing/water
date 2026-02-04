@@ -12,6 +12,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import top.fblue.common.enums.ApiCodeEnum;
 import top.fblue.common.exception.BusinessException;
 import top.fblue.common.response.ApiResponse;
 
@@ -33,7 +34,7 @@ public class GlobalExceptionHandler {
     public ApiResponse<Object> handleBusinessException(BusinessException e) {
         log.warn("业务异常: {}", e.getMessage());
 
-        return ApiResponse.error(500, e.getMessage());
+        return ApiResponse.error(ApiCodeEnum.INTERNAL_ERROR, e.getMessage());
     }
 
     /**
@@ -48,7 +49,7 @@ public class GlobalExceptionHandler {
         String parameterName = e.getParameterName();
         String parameterType = e.getParameterType();
         
-        return ApiResponse.error(400, "缺少必需的参数: " + parameterName + " (" + parameterType + "类型)");
+        return ApiResponse.error(ApiCodeEnum.BAD_REQUEST, "缺少必需的参数: " + parameterName + " (" + parameterType + "类型)");
     }
 
     /**
@@ -95,7 +96,7 @@ public class GlobalExceptionHandler {
             errors.put(violation.getPropertyPath().toString(), violation.getMessage());
         }
 
-        ApiResponse<Object> response = ApiResponse.error(400,
+        ApiResponse<Object> response = ApiResponse.error(ApiCodeEnum.BAD_REQUEST,
                 errorMessage.isEmpty() ? "参数验证失败" : errorMessage);
         response.setData(errors);
 
@@ -120,7 +121,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiResponse<Object> handleException(Exception e) {
         log.error("系统异常", e);
-        return ApiResponse.error(500, e.getMessage());
+        return ApiResponse.error(ApiCodeEnum.INTERNAL_ERROR, e.getMessage());
     }
 
     /**
@@ -138,7 +139,7 @@ public class GlobalExceptionHandler {
             errors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
 
-        ApiResponse<Object> response = ApiResponse.error(400,
+        ApiResponse<Object> response = ApiResponse.error(ApiCodeEnum.BAD_REQUEST,
                 errorMessage.isEmpty() ? "参数验证失败" : errorMessage);
         response.setData(errors);
 
