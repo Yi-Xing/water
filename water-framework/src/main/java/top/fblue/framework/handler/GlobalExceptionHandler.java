@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import top.fblue.common.enums.ApiCodeEnum;
 import top.fblue.common.exception.BusinessException;
+import top.fblue.common.exception.RpcException;
 import top.fblue.common.response.ApiResponse;
 
 import java.util.HashMap;
@@ -32,7 +33,17 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(BusinessException.class)
     public ApiResponse<Object> handleBusinessException(BusinessException e) {
-        log.warn("业务异常: {}", e.getMessage());
+        log.error("业务异常", e);
+
+        return ApiResponse.error(ApiCodeEnum.INTERNAL_ERROR, e.getMessage());
+    }
+
+    /**
+     * 处理rpc异常
+     */
+    @ExceptionHandler(RpcException.class)
+    public ApiResponse<Object> handleBusinessException(RpcException e) {
+        log.error("RPC 异常", e);
 
         return ApiResponse.error(ApiCodeEnum.INTERNAL_ERROR, e.getMessage());
     }
@@ -45,10 +56,10 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiResponse<Object> handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
         log.warn("缺少必需参数: {}", e.getMessage());
-        
+
         String parameterName = e.getParameterName();
         String parameterType = e.getParameterType();
-        
+
         return ApiResponse.error(ApiCodeEnum.BAD_REQUEST, "缺少必需的参数: " + parameterName + " (" + parameterType + "类型)");
     }
 
