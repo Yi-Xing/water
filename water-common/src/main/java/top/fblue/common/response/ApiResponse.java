@@ -3,12 +3,18 @@ package top.fblue.common.response;
 import lombok.Data;
 import top.fblue.common.enums.ApiCodeEnum;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * 统一API响应格式
  */
 @Data
-public class ApiResponse<T> {
-    
+public class ApiResponse<T> implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     /**
      * 响应状态码
      */

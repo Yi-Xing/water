@@ -2,14 +2,19 @@ package top.fblue.common.response;
 
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 分页响应VO
  */
 @Data
-public class Page<T> {
-    
+public class Page<T> implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     /**
      * 数据列表
      */
@@ -18,32 +23,32 @@ public class Page<T> {
      * 总记录数
      */
     private long total;
-    
+
     /**
      * 当前页码
      */
     private int current;
-    
+
     /**
      * 每页大小
      */
     private int size;
-    
+
     /**
      * 总页数
      */
     private long pages;
-    
+
     /**
      * 是否有上一页
      */
     private boolean hasPrevious;
-    
+
     /**
      * 是否有下一页
      */
     private boolean hasNext;
-    
+
     /**
      * 构造函数
      */
