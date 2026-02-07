@@ -19,27 +19,38 @@ public class ApiResponse<T> implements Serializable {
      * 响应状态码
      */
     private ApiCodeEnum code;
-    
+
     /**
      * 是否成功
      */
     private Boolean success;
-    
+
     /**
      * 响应消息
      */
     private String message;
-    
+
     /**
      * 响应数据
      */
     private T data;
-    
+
     /**
      * 私有构造函数
      */
-    private ApiResponse() {}
-    
+    private ApiResponse() {
+    }
+
+    /**
+     * 获取响应消息
+     */
+    public static <T> String getMessage(ApiResponse<T> response) {
+        if (response == null) {
+            return null;
+        }
+        return response.getMessage();
+    }
+
     /**
      * 成功响应
      */
@@ -51,7 +62,7 @@ public class ApiResponse<T> implements Serializable {
         response.setData(data);
         return response;
     }
-    
+
     /**
      * 成功响应（自定义消息）
      */
@@ -63,7 +74,7 @@ public class ApiResponse<T> implements Serializable {
         response.setData(data);
         return response;
     }
-    
+
     /**
      * 失败响应
      */
@@ -74,7 +85,7 @@ public class ApiResponse<T> implements Serializable {
         response.setMessage(message);
         return response;
     }
-    
+
     /**
      * 失败响应（带数据）
      */
