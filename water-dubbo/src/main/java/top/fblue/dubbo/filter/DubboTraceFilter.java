@@ -15,7 +15,7 @@ import static org.apache.dubbo.common.constants.CommonConstants.PROVIDER;
  * 服务提供者/生产者：从 attachment 解析 traceparent 并设置到 MDC，打印入参和出参
  */
 @Slf4j
-@Activate(group = {PROVIDER, CONSUMER}, order = -100)
+@Activate(group = {PROVIDER, CONSUMER}, order = Integer.MIN_VALUE)
 public class DubboTraceFilter implements Filter {
 
     @Override
