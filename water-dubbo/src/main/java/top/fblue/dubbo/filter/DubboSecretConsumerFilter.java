@@ -9,7 +9,7 @@ import top.fblue.dubbo.context.DubboSecretConfig;
 
 
 import static org.apache.dubbo.common.constants.CommonConstants.CONSUMER;
-import static top.fblue.dubbo.constant.RpcConst.URL_APPLICATION_NAME_KEY;
+import static top.fblue.dubbo.constant.RpcConst.REMOTE_APPLICATION_KEY;
 
 @Slf4j
 @Activate(group = CONSUMER, order = 1)
@@ -32,7 +32,7 @@ public class DubboSecretConsumerFilter implements Filter {
      */
     private String resolveSecret(Invoker<?> invoker) {
         URL url = invoker.getUrl();
-        String providerAppName = url.getParameter(URL_APPLICATION_NAME_KEY);
+        String providerAppName = url.getParameter(REMOTE_APPLICATION_KEY);
         return DubboSecretConfig.getInstance().getSecret().get(providerAppName);
     }
 }
