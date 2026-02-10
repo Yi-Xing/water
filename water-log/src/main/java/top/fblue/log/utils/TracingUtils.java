@@ -2,6 +2,7 @@ package top.fblue.log.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
+import top.fblue.common.utils.StringUtil;
 import top.fblue.log.constant.TraceConst;
 import top.fblue.log.context.TraceContext;
 
@@ -46,7 +47,7 @@ public class TracingUtils {
      * @return TraceContext实例
      */
     private static TraceContext fromTraceParent(String traceParent) {
-        if (traceParent == null || traceParent.trim().isEmpty()) {
+        if (StringUtil.isEmpty(traceParent)) {
             // 没有则去生成
             return new TraceContext();
         }
