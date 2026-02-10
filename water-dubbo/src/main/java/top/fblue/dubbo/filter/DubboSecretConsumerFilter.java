@@ -17,7 +17,7 @@ public class DubboSecretConsumerFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        String secret = resolveSecret(invoker, invocation);
+        String secret = resolveSecret(invoker);
         RpcContext.getClientAttachment().setAttachment(RpcConst.SECRET_KEY, secret);
         try {
             return invoker.invoke(invocation);
@@ -30,7 +30,7 @@ public class DubboSecretConsumerFilter implements Filter {
     /**
      * 获取要调用的 provider 的 secret
      */
-    private String resolveSecret(Invoker<?> invoker, Invocation invocation) {
+    private String resolveSecret(Invoker<?> invoker) {
         URL url = invoker.getUrl();
         String providerAppName = url.getParameter(URL_APPLICATION_NAME_KEY);
         return DubboSecretConfig.getInstance().getSecret().get(providerAppName);
