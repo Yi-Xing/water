@@ -24,12 +24,15 @@
         <mybatis-plus-jsqlparser.version>3.5.12</mybatis-plus-jsqlparser.version>
         <easyexcel.version>3.3.4</easyexcel.version>
         <bcrypt.version>0.10.2</bcrypt.version>
+        <dubbo.version>3.3.6</dubbo.version>
     </properties>
 
 
     <modules>
         <module>water-common</module>
         <module>water-framework</module>
+        <module>water-dubbo</module>
+        <module>water-log</module>
     </modules>
 
 
@@ -42,7 +45,6 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>UTF-8</encoding>
-                    <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>
 

@@ -1,9 +1,9 @@
-package top.fblue.framework.common.utils;
+package top.fblue.log.utils;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import top.fblue.framework.common.constant.TraceConst;
-import top.fblue.framework.common.context.TraceContext;
+import org.slf4j.MDC;
+import top.fblue.log.constant.TraceConst;
+import top.fblue.log.context.TraceContext;
 
 /**
  * 全链路追踪工具类
@@ -15,14 +15,27 @@ import top.fblue.framework.common.context.TraceContext;
 public class TracingUtils {
 
     /**
-     * 从HTTP请求中提取追踪上下文并设置到MDC
+     * 从 traceparent 字符串提取追踪上下文并设置到 MDC
      *
-     * @param request HTTP请求
+     * @param traceParent traceparent 头或 attachment 值，可为 null
      */
-    public static void extractAndSetTraceContext(HttpServletRequest request) {
-        String traceParent = request.getHeader(TraceConst.TRACE_PARENT_HEADER);
+    public static void extractAndSetTraceContext(String traceParent) {
         TraceContext traceContext = fromTraceParent(traceParent);
         traceContext.setToMDC();
+    }
+
+    /**
+     * 根据当前 MDC 中的追踪上下文生成子 span 的 traceparent，用于调用方传递
+     * 若 MDC 无追踪信息则生成新的根 span
+     *
+     * @return traceparent 字符串，格式 00-{traceId}-{spanId}-{flags}
+     */
+    public static String getTraceParentFor() {
+        String traceId = MDC.get(TraceConst.TRACE_ID_KEY);
+        String spanId = MDC.get(TraceConst.SPAN_ID_KEY);
+        String sampled = MDC.get(TraceConst.SAMPLED_KEY);
+        TraceContext child = new TraceContext(traceId, spanId, sampled);
+        return child.toTraceParent();
     }
 
     /**
