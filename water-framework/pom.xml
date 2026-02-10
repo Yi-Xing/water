@@ -18,6 +18,12 @@
             <artifactId>water-common</artifactId>
             <version>${revision}</version>
         </dependency>
+        <!-- common -->
+        <dependency>
+            <groupId>top.fblue</groupId>
+            <artifactId>water-log</artifactId>
+            <version>${revision}</version>
+        </dependency>
 
         <!-- 数据库链接 -->
         <dependency>

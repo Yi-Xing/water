@@ -6,7 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import top.fblue.common.utils.StringUtil;
-import top.fblue.framework.common.utils.TracingUtils;
+import top.fblue.log.constant.TraceConst;
+import top.fblue.log.utils.TracingUtils;
 
 
 /**
@@ -28,7 +29,8 @@ public class TraceInterceptor implements HandlerInterceptor {
         request.setAttribute(START_TIME_ATTRIBUTE, startTime);
         
         // 提取并设置追踪上下文
-        TracingUtils.extractAndSetTraceContext(request);
+        String traceParent = request.getHeader(TraceConst.TRACE_PARENT_HEADER);
+        TracingUtils.extractAndSetTraceContext(traceParent);
         
         // 构建请求入参日志
         String requestMethod = request.getMethod();
@@ -57,11 +59,7 @@ public class TraceInterceptor implements HandlerInterceptor {
             // 记录请求出参日志，全局异常处理把异常给拦截了，这里ex没有意义
             log.info("http responseStatusCode={} responseLatency={}",
                     responseStatusCode, responseLatency);
-            
-        } catch (Exception logEx) {
-            // 只是捕获日志记录过程中的异常，不会影响原始业务异常的传递。
-            log.error("afterCompletion err", logEx);
-        } finally {
+        }  finally {
             // 清除追踪上下文
             TracingUtils.clearTraceContext();
         }
