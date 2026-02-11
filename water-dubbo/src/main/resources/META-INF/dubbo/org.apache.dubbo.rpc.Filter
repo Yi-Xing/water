@@ -1,4 +1,5 @@
 dubboAuthFilter=top.fblue.dubbo.filter.DubboSecretAuthFilter
 dubboGlobalExceptionFilter=top.fblue.dubbo.filter.DubboGlobalExceptionFilter
-dubboTraceFilter=top.fblue.dubbo.filter.DubboTraceFilter
+dubboTraceConsumerFilter=top.fblue.dubbo.filter.DubboTraceConsumerFilter
+dubboTraceProviderFilter=top.fblue.dubbo.filter.DubboTraceProviderFilter
 dubboSecretConsumerFilter=top.fblue.dubbo.filter.DubboSecretConsumerFilter
