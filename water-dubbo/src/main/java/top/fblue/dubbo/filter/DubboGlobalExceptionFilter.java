@@ -17,7 +17,7 @@ import static org.apache.dubbo.common.constants.CommonConstants.PROVIDER;
  * 捕获业务异常、参数校验异常等，统一封装为 ApiResponse 错误返回，不向外抛异常
  */
 @Slf4j
-@Activate(group = PROVIDER,order = 1)
+@Activate(group = PROVIDER, order = 1)
 public class DubboGlobalExceptionFilter implements Filter {
 
     @Override
@@ -38,6 +38,8 @@ public class DubboGlobalExceptionFilter implements Filter {
         String target = invocation.getTargetServiceUniqueName() + "#" + invocation.getMethodName();
         if (e instanceof BusinessException) {
             log.error("Dubbo 业务异常 {}:", target, e);
+        } else if (e instanceof RpcException) {
+            log.error("Dubbo Rpc 异常 {}:", target, e);
         } else if (e instanceof ConstraintViolationException) {
             log.warn("Dubbo 参数校验失败 [{}]: {}", target, e.getMessage());
         } else {
@@ -48,6 +50,9 @@ public class DubboGlobalExceptionFilter implements Filter {
 
     private ApiResponse<?> toApiResponse(Throwable e) {
         if (e instanceof BusinessException) {
+            return ApiResponse.error(ApiCodeEnum.INTERNAL_ERROR, e.getMessage());
+        }
+        if (e instanceof RpcException) {
             return ApiResponse.error(ApiCodeEnum.INTERNAL_ERROR, e.getMessage());
         }
         if (e instanceof ConstraintViolationException cve) {

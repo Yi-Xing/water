@@ -32,7 +32,7 @@ public class DubboSecretAuthFilter implements Filter {
         try {
             if (!Objects.equals(expectedSecret, clientSecret)) {
                 log.warn("RPC 鉴权失败 clientSecret={}", clientSecret);
-                throw new BusinessException("RPC 鉴权失败：秘钥无效或未传递");
+                throw new RpcException("RPC 鉴权失败：秘钥无效或未传递");
             }
             return invoker.invoke(invocation);
         } finally {
