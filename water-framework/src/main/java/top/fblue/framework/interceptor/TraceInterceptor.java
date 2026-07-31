@@ -3,7 +3,6 @@ package top.fblue.framework.interceptor;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import top.fblue.common.utils.StringUtil;
 import top.fblue.log.constant.TraceConst;
@@ -17,7 +16,6 @@ import top.fblue.log.utils.TracingUtils;
  * @author system
  */
 @Slf4j
-@Component
 public class TraceInterceptor implements HandlerInterceptor {
 
     private static final String START_TIME_ATTRIBUTE = "requestStartTime";

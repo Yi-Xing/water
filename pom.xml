@@ -33,6 +33,7 @@
         <module>water-framework</module>
         <module>water-dubbo</module>
         <module>water-log</module>
+        <module>water-auth</module>
     </modules>
 
 

@@ -36,8 +36,13 @@ public class DubboGlobalExceptionFilter implements Filter {
     private Result buildErrorResult(Throwable e, Invocation invocation) {
         ApiResponse<?> errorResponse = toApiResponse(e);
         String target = invocation.getTargetServiceUniqueName() + "#" + invocation.getMethodName();
-        if (e instanceof BusinessException) {
-            log.error("Dubbo 业务异常 {}:", target, e);
+        if (e instanceof BusinessException businessException) {
+            if (businessException.getCode() == ApiCodeEnum.INTERNAL_ERROR) {
+                log.error("Dubbo 业务异常 {}:", target, e);
+            } else {
+                log.warn("Dubbo 业务异常 [{}] code={}: {}", target,
+                        businessException.getCode().getCode(), e.getMessage());
+            }
         } else if (e instanceof RpcException) {
             log.error("Dubbo Rpc 异常 {}:", target, e);
         } else if (e instanceof ConstraintViolationException) {
@@ -49,8 +54,8 @@ public class DubboGlobalExceptionFilter implements Filter {
     }
 
     private ApiResponse<?> toApiResponse(Throwable e) {
-        if (e instanceof BusinessException) {
-            return ApiResponse.error(ApiCodeEnum.INTERNAL_ERROR, e.getMessage());
+        if (e instanceof BusinessException businessException) {
+            return ApiResponse.error(businessException.getCode(), e.getMessage());
         }
         if (e instanceof RpcException) {
             return ApiResponse.error(ApiCodeEnum.INTERNAL_ERROR, e.getMessage());

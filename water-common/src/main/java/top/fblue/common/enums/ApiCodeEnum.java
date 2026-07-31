@@ -6,13 +6,27 @@ import lombok.Getter;
 import top.fblue.common.exception.BusinessException;
 
 /**
- * 统一 API 响应码枚举
+ * 定义 HTTP、业务异常和统一 API 响应共同使用的状态码。
  */
 @Getter
 public enum ApiCodeEnum {
+    /** 请求处理成功。 */
     SUCCESS(200, "操作成功"),
+
+    /** 请求参数或业务前置条件不合法。 */
     BAD_REQUEST(400, "请求参数错误"),
-    INTERNAL_ERROR(500, "系统异常");
+
+    /** 未认证或认证信息已失效。 */
+    UNAUTHORIZED(401, "未认证"),
+
+    /** 当前身份无权访问资源。 */
+    FORBIDDEN(403, "无权访问"),
+
+    /** 服务内部处理异常。 */
+    INTERNAL_ERROR(500, "系统异常"),
+
+    /** 鉴权等依赖服务暂时不可用。 */
+    SERVICE_UNAVAILABLE(503, "服务暂不可用");
 
     private final int code;
     private final String desc;
@@ -40,4 +54,3 @@ public enum ApiCodeEnum {
         throw new BusinessException("Unknown ApiCodeEnum code: " + code);
     }
 }
-

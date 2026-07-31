@@ -18,11 +18,12 @@ import top.fblue.common.exception.RpcException;
 import top.fblue.common.response.ApiResponse;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * 全局异常处理器
+ * 将 Web 层业务异常、RPC 异常和参数校验异常转换为统一 API 响应。
  */
 @Slf4j
 @RestControllerAdvice
@@ -35,7 +36,7 @@ public class GlobalExceptionHandler {
     public ApiResponse<Object> handleBusinessException(BusinessException e) {
         log.error("业务异常", e);
 
-        return ApiResponse.error(ApiCodeEnum.INTERNAL_ERROR, e.getMessage());
+        return ApiResponse.error(e.getCode(), e.getMessage());
     }
 
     /**
@@ -138,7 +139,7 @@ public class GlobalExceptionHandler {
     /**
      * 构建字段验证错误响应
      */
-    private ApiResponse<Object> buildValidationErrorResponse(java.util.List<FieldError> fieldErrors) {
+    private ApiResponse<Object> buildValidationErrorResponse(List<FieldError> fieldErrors) {
         // 提取所有验证错误信息
         String errorMessage = fieldErrors.stream()
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())
@@ -156,4 +157,4 @@ public class GlobalExceptionHandler {
 
         return response;
     }
-} 
+}

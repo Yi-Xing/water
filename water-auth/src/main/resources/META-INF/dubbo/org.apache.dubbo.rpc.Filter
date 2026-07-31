@@ -1,0 +1,2 @@
+ssoUserConsumerFilter=top.fblue.auth.dubbo.filter.DubboUserConsumerFilter
+ssoUserProviderFilter=top.fblue.auth.dubbo.filter.DubboUserProviderFilter
