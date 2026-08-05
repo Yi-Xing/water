@@ -12,6 +12,7 @@
 Water 是共享基础组件仓库：
 
 - `water-common`：通用类型、异常、响应和无框架工具。
+- `water-redis`：可复用的 Redis 客户端与 DNS 解析自动配置。
 - `water-log`：日志与链路上下文。
 - `water-framework`：Web、MyBatis、序列化和通用框架配置。
 - `water-dubbo`：Dubbo 配置、过滤器、鉴权和链路透传。

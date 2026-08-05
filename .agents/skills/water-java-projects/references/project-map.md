@@ -6,7 +6,7 @@
 
 | 仓库 | Maven 模块 | 主要职责 |
 | --- | --- | --- |
-| `water` | `water-common`、`water-log`、`water-framework`、`water-dubbo`、`water-auth` | Java 21 / Spring Boot 3.2 的共享基础组件、日志、框架、Dubbo 和认证能力 |
+| `water` | `water-common`、`water-redis`、`water-log`、`water-framework`、`water-dubbo`、`water-auth` | Java 21 / Spring Boot 3.2 的共享基础组件、Redis、日志、框架、Dubbo 和认证能力 |
 | `watermelon` | `watermelon-api`、`watermelon-auth`、`watermelon-service` | RBAC 用户权限系统；API 契约、认证扩展和 DDD 服务实现 |
 | `banana` | `banana-api`、`banana-service` | 文件管理系统；API 契约和 DDD 服务实现 |
 
@@ -20,10 +20,11 @@ water
 ```
 
 - `watermelon-api` 使用 `water-common`。
-- `watermelon-auth` 使用 `watermelon-api` 和 `water-auth`。
+- `water-auth` 使用 `water-redis`。
+- `watermelon-auth` 使用 `watermelon-api`、`water-auth` 和 `water-redis`。
 - `watermelon-service` 使用 `watermelon-api`、`watermelon-auth` 和 `water-dubbo`。
 - `banana` 的父 POM 是本地 `top.fblue:water:0.0.1-SNAPSHOT`，且 `relativePath` 为空，因此构建前需要本地仓库中已有对应的 `water` 父 POM。
-- `banana-service` 使用 `water-dubbo`、`water-auth` 和 `watermelon-api`。
+- `banana-service` 使用 `water-dubbo`、`water-auth`、`water-redis` 和 `watermelon-api`。
 - 三个仓库当前共享版本 `0.0.1-SNAPSHOT`；不要假设此版本永远不变，以当前 POM 为准。
 
 ## 常用验证命令

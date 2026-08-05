@@ -30,6 +30,7 @@
 
     <modules>
         <module>water-common</module>
+        <module>water-redis</module>
         <module>water-framework</module>
         <module>water-dubbo</module>
         <module>water-log</module>
