@@ -24,3 +24,7 @@ Water 是共享基础组件仓库：
 - 新增自动配置时，同步维护配置属性、条件装配和 `AutoConfiguration.imports`。
 - 修改 Web/Dubbo 上下文或过滤器时，保证异常路径也能正确清理上下文，并保持消费端与提供端语义一致。
 - 不提交密钥、口令、令牌、Cookie、真实连接串、私有服务地址或个人信息；配置示例只使用明显占位符。
+
+## Git 提交
+
+- 生成 Git commit message 时必须使用中文说明，不得使用纯英文；如采用 Conventional Commits，可保留 `feat:`、`fix:` 等类型前缀，但正文必须为中文。
