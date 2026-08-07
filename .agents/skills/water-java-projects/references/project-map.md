@@ -27,6 +27,24 @@ water
 - `banana-service` 使用 `water-dubbo`、`water-auth`、`water-redis` 和 `watermelon-api`。
 - 三个仓库当前共享版本 `0.0.1-SNAPSHOT`；不要假设此版本永远不变，以当前 POM 为准。
 
+## 本地跨系统联调地址
+
+| 系统 | 前端 | HTTP 后端 | Dubbo |
+| --- | --- | --- | --- |
+| Watermelon | `http://watermelon.fblue.top:3000` | `http://watermelon.fblue.top:8080` | `watermelon.fblue.top:20880` |
+| Banana | `http://banana.fblue.top:5173` | `http://banana.fblue.top:8081` | `banana.fblue.top:20881` |
+
+本机 `/etc/hosts` 必须包含：
+
+```text
+127.0.0.1 watermelon.fblue.top
+127.0.0.1 banana.fblue.top
+```
+
+- 启动验证、HTTP 探测、浏览器操作、SSO 回调、权限动态刷新和 Dubbo 直连测试均使用上述域名，不能混用 `localhost` 或 `127.0.0.1`。
+- 测试前先确认两个域名均解析到 `127.0.0.1`；缺少映射时先请求用户授权修改系统 hosts，不得静默回退到其他地址。
+- 使用 `curl` 测试时若本机配置了 HTTP 代理，应通过 `--noproxy '*'` 保证请求直连本机。
+
 ## 常用验证命令
 
 在对应仓库根目录执行：

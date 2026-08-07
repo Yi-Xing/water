@@ -36,12 +36,15 @@ public class JwtTokenService {
     private final Clock clock;
 
     /**
-     * 使用 UTC 系统时钟创建 JWT 服务。
+     * 使用当前服务器默认时区时钟创建 JWT 服务。
+     *
+     * <p>Spring 应用应优先使用接收 {@link Clock} 的构造方法，由 Water 自动配置注入统一时钟；
+     * 此构造方法仅保留给手动创建服务的兼容场景。</p>
      *
      * @param properties SSO 鉴权配置
      */
     public JwtTokenService(SsoAuthProperties properties) {
-        this(properties, Clock.systemUTC());
+        this(properties, Clock.systemDefaultZone());
     }
 
     /**
@@ -50,7 +53,7 @@ public class JwtTokenService {
      * @param properties SSO 鉴权配置
      * @param clock      JWT 签发和校验使用的时钟
      */
-    JwtTokenService(SsoAuthProperties properties, Clock clock) {
+    public JwtTokenService(SsoAuthProperties properties, Clock clock) {
         this.properties = properties;
         this.clock = clock;
     }

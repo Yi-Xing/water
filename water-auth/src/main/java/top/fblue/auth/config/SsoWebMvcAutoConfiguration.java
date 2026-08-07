@@ -16,6 +16,8 @@ import top.fblue.auth.web.SsoAuthenticationInterceptor;
 import top.fblue.auth.web.SsoExceptionHandler;
 import top.fblue.auth.web.SsoStateCookieService;
 
+import java.time.Clock;
+
 /**
  * 在启用 SSO 时注册 JWT、令牌撤销、异常响应和 Web MVC 鉴权拦截器等基础组件。
  */
@@ -26,12 +28,13 @@ public class SsoWebMvcAutoConfiguration {
 
     /**
      * @param properties SSO 鉴权配置
+     * @param clock      Water 提供的应用统一时钟
      * @return JWT 签发与验证服务
      */
     @Bean
     @ConditionalOnMissingBean
-    JwtTokenService jwtTokenService(SsoAuthProperties properties) {
-        return new JwtTokenService(properties);
+    JwtTokenService jwtTokenService(SsoAuthProperties properties, Clock clock) {
+        return new JwtTokenService(properties, clock);
     }
 
     /**
