@@ -8,18 +8,18 @@ import org.apache.dubbo.rpc.Invoker;
 import org.apache.dubbo.rpc.Result;
 import org.apache.dubbo.rpc.RpcContext;
 import top.fblue.auth.common.SsoConstants;
-import top.fblue.auth.context.SsoHttpContext;
 import top.fblue.auth.context.SsoPrincipal;
+import top.fblue.auth.context.SsoUserContext;
 
 /**
- * 在 Dubbo Consumer 侧将当前 HTTP 的用户身份写入调用附件传递给下游 Dubbo 服务，并在调用结束后清理附件。
+ * 在 Dubbo Consumer 侧将当前执行线程的用户身份写入调用附件传递给下游服务，并在调用结束后清理附件。
  *
  */
 @Activate(group = CommonConstants.CONSUMER, order = 100)
 public class DubboUserConsumerFilter implements Filter {
 
     /**
-     * 在受保护的 Dubbo 调用发出前，将当前 HTTP SSO 用户写入 Consumer Attachment。
+     * 在受保护的 Dubbo 调用发出前，将当前 SSO 用户写入 Consumer Attachment。
      *
      * @param invoker    Dubbo 服务调用器
      * @param invocation 当前 RPC 调用信息
@@ -30,7 +30,7 @@ public class DubboUserConsumerFilter implements Filter {
         if (RpcPublicUtils.isPublic(invoker, invocation)) {
             return invoker.invoke(invocation);
         }
-        SsoPrincipal principal = SsoHttpContext.getCurrentUserInfo();
+        SsoPrincipal principal = SsoUserContext.getCurrentUserInfo();
         var attachments = RpcContext.getClientAttachment();
         attachments.setAttachment(SsoConstants.RPC_USER_ID, String.valueOf(principal.getUserId()));
         attachments.setAttachment(SsoConstants.RPC_SUBJECT, principal.getSubject());

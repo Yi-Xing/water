@@ -38,6 +38,15 @@ public final class SsoRpcContext {
     }
 
     /**
+     * 获取当前 Dubbo Provider 调用的可空 SSO 用户。
+     *
+     * @return 当前 SSO 用户身份，未绑定时返回 {@code null}
+     */
+    public static SsoPrincipal getNullable() {
+        return CURRENT.get();
+    }
+
+    /**
      * 获取当前 Dubbo Provider 调用的必登录用户 ID。
      *
      * @return 当前用户 ID
